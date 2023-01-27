@@ -1,2 +1,2 @@
 # test-machine-learning
-model machine learning pemula
+model machine learning oleh pemula
