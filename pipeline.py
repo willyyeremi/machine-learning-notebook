@@ -10,7 +10,6 @@ import matplotlib.pyplot
 # machine learning
 import sklearn.model_selection
 import missing_value
-import categorical_handle
 import ml_model
 
 # loading data
