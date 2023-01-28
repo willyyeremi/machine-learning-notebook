@@ -23,3 +23,4 @@ def categorical_handle(train_data,test_data,list_column_OE,list_column_OHE):
         # combine the new column to the original data
         train_data=pandas.concat([train_data,OH_column_train], axis=1) 
         test_data=pandas.concat([test_data,OH_column_test], axis=1)
+    # Target Encoding

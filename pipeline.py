@@ -1,13 +1,3 @@
-# library
-
-# data analytic library
-import pandas
-import numpy
-
-# visualization library
-import matplotlib.pyplot
-
-# machine learning
 import sklearn.model_selection
 import data_preparation
 import missing_value
