@@ -9,11 +9,15 @@ import matplotlib.pyplot
 
 # machine learning
 import sklearn.model_selection
+import data_preparation
 import missing_value
 import ml_model
 
 # loading data
-data=pandas.read_csv(r"C:\Users\willy\Documents\Database\Kaggle\Melbourne Housing Snapshot\melb_data.csv")
+path=input("Write the data location. Don't forget tu use r at the front of the path and double aposthrope. For example:\nr"+'"C:\\Users\\willy\\Documents\Database\\Kaggle\\Melbourne Housing Snapshot\\melb_data.csv"\n')
+data=data_preparation.load_data(path)
+print(path)
+
 
 # # list of numerical feature
 # numerical_feature=['Rooms','Bedroom2','Bathroom','Car','Landsize','YearBuilt']
@@ -33,13 +37,13 @@ data=pandas.read_csv(r"C:\Users\willy\Documents\Database\Kaggle\Melbourne Housin
 #         for y in x:
 #             feature_list.append(y)
 
-feature_list=['Rooms','Bedroom2','Bathroom','Car','Landsize']
-feature=data[feature_list]
-target=data.Price
+# feature_list=['Rooms','Bedroom2','Bathroom','Car','Landsize']
+# feature=data[feature_list]
+# target=data.Price
 
-# train test split method
-a_data,b_data,a_target,b_target=sklearn.model_selection.train_test_split(feature,target,random_state=1)
+# # train test split method
+# a_data,b_data,a_target,b_target=sklearn.model_selection.train_test_split(feature,target,random_state=1)
 
-# model
-missing_value.missing_value(a_data,b_data,feature_list)
-print(ml_model.multi_decision_tree(a_data,b_data,a_target,b_target,2,1000))
+# # model
+# missing_value.missing_value(a_data,b_data,feature_list)
+# print(ml_model.multi_decision_tree(a_data,b_data,a_target,b_target,2,1000))
