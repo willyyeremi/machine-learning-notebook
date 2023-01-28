@@ -14,9 +14,8 @@ import missing_value
 import ml_model
 
 # loading data
-path=input("Write the data location. Don't forget tu use r at the front of the path and double aposthrope. For example:\nr"+'"C:\\Users\\willy\\Documents\Database\\Kaggle\\Melbourne Housing Snapshot\\melb_data.csv"\n')
-data=data_preparation.load_data(path)
-print(path)
+data=data_preparation.load_data()
+# print(data)
 
 
 # # list of numerical feature
