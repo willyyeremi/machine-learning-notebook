@@ -1,16 +1,20 @@
 import sys
 import sklearn.model_selection
 
-list_path=[]
 sys.path.insert(0,"C:/Users/willy/Documents/GitHub/test-machine-learning/data_preparation")
 sys.path.insert(0,"C:/Users/willy/Documents/GitHub/test-machine-learning/preprocessing")
 sys.path.insert(0,"C:/Users/willy/Documents/GitHub/test-machine-learning/model")
 import load_data
+import data_description
 import missing_value
 import multi_decision_tree
 
 # loading data
 data=load_data.load_data()
+
+# data information
+data_description.data_description_1(data)
+data_description.data_description_2(data)
 
 # # list of numerical feature
 # numerical_feature=['Rooms','Bedroom2','Bathroom','Car','Landsize','YearBuilt']
@@ -30,15 +34,15 @@ data=load_data.load_data()
 #         for y in x:
 #             feature_list.append(y)
 
-feature_list=['Rooms','Bedroom2','Bathroom','Car','Landsize']
-feature=data[feature_list]
-target=data.Price
+# feature_list=['Rooms','Bedroom2','Bathroom','Car','Landsize']
+# feature=data[feature_list]
+# target=data.Price
 
-# train test split method
-a_data,b_data,a_target,b_target=sklearn.model_selection.train_test_split(feature,target,random_state=1)
+# # train test split method
+# a_data,b_data,a_target,b_target=sklearn.model_selection.train_test_split(feature,target,random_state=1)
 
-# preprocessing
-missing_value.missing_value(a_data,b_data,feature_list)
+# # preprocessing
+# missing_value.missing_value(a_data,b_data,feature_list)
 
-# model
-print(multi_decision_tree.multi_decision_tree(a_data,b_data,a_target,b_target,2,1000))
+# # model
+# print(multi_decision_tree.multi_decision_tree(a_data,b_data,a_target,b_target,2,1000))
