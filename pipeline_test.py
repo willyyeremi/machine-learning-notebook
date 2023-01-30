@@ -17,4 +17,4 @@ data=pandas.read_csv(r"C:\Users\willy\Documents\Database\Kaggle\Melbourne Housin
 # data_description.data_description_1(data)
 
 # choosing feature and target
-feature_target.numerical_feature(data)
+# feature_target.numerical_feature(data)

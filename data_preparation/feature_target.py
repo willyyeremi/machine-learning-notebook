@@ -1,16 +1,15 @@
-def numerical_feature(data):
+def numerical_feature(data,feature):
     '''for selecting feature from column with numeric data'''
     import pandas
-    # selecting feature
-    feature=list(map(str,input("write columns name with numeric data that will be used as feature separeted with comma\n").split(",")))
     # feature checking 
     not_exist=[]
     wrong_type=[]
     for i in feature:
-        if i not in feature:
+        if i not in data.columns:
             not_exist.append(i)
-        if data[data[i]].dtypes!=int or data[data[i]].dtypes!=float:
-            wrong_type.append(i)
+        if i not in not_exist:
+            if data[i].dtypes not in ["int64","float64"]:
+                wrong_type.append(i)
     if len(not_exist)!=0:
         print("columns name inside the list below doesn't exist. please input valid column name")
         print(not_exist)
@@ -19,11 +18,11 @@ def numerical_feature(data):
         print(wrong_type)  
     # validation if feature is valid or not
     if len(not_exist)!=0 or len(wrong_type)!=0:
-        numerical_feature()
+        numerical_feature(data)
     else:
         return feature
 
-def ordinal_feature():
+def ordinal_feature(data,feature):
     '''for for selecting feature from column with categorical data with ordinality'''
     import pandas
     # determining for the need of this function
@@ -32,15 +31,13 @@ def ordinal_feature():
         print("enter valid answer")
         ordinal_feature()
     elif question.upper=="y":
-        # selecting feature
-        feature=list(map(str,input("write columns name with categorical data that will be used as feature separeted with comma\n").split(",")))
         # feature checking 
         not_exist=[]
         wrong_type=[]
         for i in feature:
-            if i not in feature:
+            if i not in data.columns:
                 not_exist.append(i)
-            if data[data[i]].dtypes!=object:
+            if data[data[i]].dtypes!="object":
                 wrong_type.append(i)
         if len(not_exist)!=0:
             print("columns name inside the list below doesn't exist. please input valid column name")
