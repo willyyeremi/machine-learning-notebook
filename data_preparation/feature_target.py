@@ -18,27 +18,23 @@ def numerical_feature(data,feature):
         print(wrong_type)  
     # validation if feature is valid or not
     if len(not_exist)!=0 or len(wrong_type)!=0:
-        numerical_feature(data)
+        return []
     else:
         return feature
 
 def ordinal_feature(data,feature):
     '''for for selecting feature from column with categorical data with ordinality'''
     import pandas
-    # determining for the need of this function
-    question=input("do you want to include column with categorical data and have ordinality?\ny: Yes\nn: No\n")
-    if question.upper not in ["Y","N"]:
-        print("enter valid answer")
-        ordinal_feature()
-    elif question.upper=="y":
+    if len(feature)!=0:
         # feature checking 
         not_exist=[]
         wrong_type=[]
         for i in feature:
             if i not in data.columns:
                 not_exist.append(i)
-            if data[data[i]].dtypes!="object":
-                wrong_type.append(i)
+            if i not in not_exist:    
+                if data[i].dtypes!="object":
+                    wrong_type.append(i)
         if len(not_exist)!=0:
             print("columns name inside the list below doesn't exist. please input valid column name")
             print(not_exist)
@@ -47,6 +43,40 @@ def ordinal_feature(data,feature):
             print(wrong_type)  
         # validation if feature is valid or not
         if len(not_exist)!=0 or len(wrong_type)!=0:
-            numerical_feature()
+            return []
         else:
             return feature
+
+def categorical_check(data,ordinal_feature,oh_feature,target_feature):
+    wrong=[]
+    ordinal_oh=[]
+    ordinal_target=[]
+    oh_target=[]
+    for i in ordinal_feature:
+        for j in oh_feature:
+            if i==j:
+                ordinal_oh.append(j)
+                wrong.append(j)
+        for k in target_feature:
+            if i==k:
+                ordinal_target.append(k)
+                wrong.append(k)
+    for j in oh_feature:
+        for k in target_feature:
+            if j==k:
+                oh_target.append(k)
+                wrong.append(k)
+    if len(wrong)!=0:
+        print("the listed feature placed at ordinal_feature and oh_feature. please remove from one of the list.")
+        print(ordinal_oh)
+        print("the listed feature placed at ordinal_feature and target_feature. please remove from one of the list.")
+        print(ordinal_target)
+        print("the listed feature placed at target_feature and oh_feature. please remove from one of the list.")
+        print(oh_target)
+        return []
+    else:
+        of=feature_target.ordinal_feature(data,ordinal_feature)
+        ohf=feature_target.oh_feature(data,oh_feature)
+        tf=feature_target.target_feature(data,target_feature)
+        categorical=of.append(ohf,tf)
+        return categorical
