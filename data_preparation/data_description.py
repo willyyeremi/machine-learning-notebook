@@ -13,7 +13,15 @@ def data_description_1(data):
     desc_info=data.describe()
     IQR=pandas.DataFrame(data.select_dtypes(include='number').quantile(0.75)-data.select_dtypes(include='number').quantile(0.25),columns=['interquartile range']).transpose()
     mode=data.select_dtypes(include='number').mode().head(1).set_index(numpy.array(['mode']))
-    desc_info=desc_info.append([IQR,mode])
+    unique_value=data.agg(['count', 'size', 'nunique']).rename(index={'nunique':'unique (no null)'})
+    have_null=[]
+    for x in range(len(unique_value.columns)):
+        if unique_value.iloc[0,x]==unique_value.iloc[1,x]:
+            have_null.append(0+unique_value.iloc[2,x])
+        else:
+            have_null.append(0+unique_value.iloc[2,x])
+    unique_value=unique_value.iloc[[2]].append(pandas.DataFrame(data=have_null,columns=['unique (with null)'],index=unique_value.columns.tolist()).transpose())
+    desc_info=desc_info.append([IQR,mode,unique_value])
     print(desc_info)
 
 def data_description_2(data):

@@ -19,6 +19,8 @@ def numerical_feature(data,feature):
     # validation if feature is valid or not
     if len(not_exist)!=0 or len(wrong_type)!=0:
         return []
+    elif len(feature)<1:
+        print("numerical feature must not empty. please select numerical feature.")
     else:
         return feature
 
@@ -75,8 +77,11 @@ def categorical_check(data,ordinal_feature,oh_feature,target_feature):
         print(oh_target)
         return []
     else:
-        of=categorical_feature(data,ordinal_feature)
-        ohf=categorical_feature(data,oh_feature)
-        tf=categorical_feature(data,target_feature)
-        categorical=of.append(ohf,tf)
+        categorical=[]
+        if len(ordinal_feature)>0:
+            categorical.append(categorical_feature(data,ordinal_feature))
+        if len(ordinal_feature)>0:    
+            categorical.append(categorical_feature(data,oh_feature))
+        if len(ordinal_feature)>0:
+            categorical.append(categorical_feature(data,target_feature))
         return categorical
