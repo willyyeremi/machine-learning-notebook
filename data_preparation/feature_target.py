@@ -22,7 +22,7 @@ def numerical_feature(data,feature):
     else:
         return feature
 
-def ordinal_feature(data,feature):
+def categorical_feature(data,feature):
     '''for for selecting feature from column with categorical data with ordinality'''
     import pandas
     if len(feature)!=0:
@@ -75,8 +75,8 @@ def categorical_check(data,ordinal_feature,oh_feature,target_feature):
         print(oh_target)
         return []
     else:
-        of=feature_target.ordinal_feature(data,ordinal_feature)
-        ohf=feature_target.oh_feature(data,oh_feature)
-        tf=feature_target.target_feature(data,target_feature)
+        of=categorical_feature(data,ordinal_feature)
+        ohf=categorical_feature(data,oh_feature)
+        tf=categorical_feature(data,target_feature)
         categorical=of.append(ohf,tf)
         return categorical
