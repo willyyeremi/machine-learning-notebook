@@ -19,7 +19,7 @@ def data_description_1(data):
         if unique_value.iloc[0,x]==unique_value.iloc[1,x]:
             have_null.append(0+unique_value.iloc[2,x])
         else:
-            have_null.append(0+unique_value.iloc[2,x])
+            have_null.append(1+unique_value.iloc[2,x])
     unique_value=unique_value.iloc[[2]].append(pandas.DataFrame(data=have_null,columns=['unique (with null)'],index=unique_value.columns.tolist()).transpose())
     desc_info=desc_info.append([IQR,mode,unique_value])
     print(desc_info)

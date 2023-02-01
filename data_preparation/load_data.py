@@ -1,4 +1,4 @@
-def load_data(type_data,path):
+def load_data(path,type_data):
     '''load data from csv files'''
     import pandas
     import glob
