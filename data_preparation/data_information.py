@@ -1,4 +1,4 @@
-def data_description_1(data):
+def data_description(data):
     '''data description and another information about data'''
     import numpy
     import pandas
@@ -24,7 +24,7 @@ def data_description_1(data):
     desc_info=desc_info.append([IQR,mode,unique_value])
     print(desc_info)
 
-def data_description_2(data):
+def data_relation(data):
     '''further information about the data with graphic'''
     import pandas
     import matplotlib
