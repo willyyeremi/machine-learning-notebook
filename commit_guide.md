@@ -45,7 +45,7 @@ Choose one of a type from the list on below when writting commit description
     <li>fix – a bug fix has occurred</li>
     <li>perf – performance improvements</li>
     <li>revert – reverts a previous commit</li>
-    <li>refactor – refactored code that neither fixes a bug nor adds a feature</li>
+    <li>refactor – restructuring code while not changing its original functionality</li>
     <li>style – changes that do not affect the meaning of the code, likely related to code formatting such as white-space, missing semi-colons, and so on.</li>
     <li>test – including new or correcting previous tests</li>
 </ol>
