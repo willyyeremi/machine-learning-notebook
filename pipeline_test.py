@@ -1,22 +1,29 @@
+import os
 import sys
 import pandas
 import sklearn.model_selection
 
-sys.path.insert(0,"C:\Users\willy\Documents\GitHub\test-machine-learning\src\data_preparation")
-sys.path.insert(0,"C:\Users\willy\Documents\GitHub\test-machine-learning\src\splitting_data")
-sys.path.insert(0,"C:\Users\willy\Documents\GitHub\test-machine-learning\src\preprocessing")
-sys.path.insert(0,"C:\Users\willy\Documents\GitHub\test-machine-learning\src\model")
-import data_description
+sys.path.insert(0,os.getcwd()+r"\src\data_preparation")
+sys.path.insert(0,os.getcwd()+r"\src\splitting_data")
+sys.path.insert(0,os.getcwd()+r"\src\preprocessing")
+sys.path.insert(0,os.getcwd()+r"\src\model")
+import data_information
 import feature_target
 import splitting_method
 import missing_value
 import multi_decision_tree
 
+for folder in os.listdir(os.getcwd()+r"\src"):
+    sys.path.insert(0,os.getcwd()+"\\src\\"+folder)
+    for cust_module in os.listdir(os.getcwd()+r"\src\\"+folder):
+        if cust_module.endswith(".py"):
+            import cust_module
+
 # loading data
 data=pandas.read_csv(r"C:\Users\willy\Documents\Database\Kaggle\Melbourne Housing Snapshot\melb_data.csv")
 
 # # data information
-# data_description.data_description_1(data)
+# data_information.data_description(data)
 
 
 # for data with int64 or float64 type
