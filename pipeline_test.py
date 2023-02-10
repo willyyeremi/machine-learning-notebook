@@ -1,29 +1,40 @@
 import os
 import sys
+import importlib.machinery
+import importlib.util
 import pandas
 import sklearn.model_selection
 
-sys.path.insert(0,os.getcwd()+r"\src\data_preparation")
-sys.path.insert(0,os.getcwd()+r"\src\splitting_data")
-sys.path.insert(0,os.getcwd()+r"\src\preprocessing")
-sys.path.insert(0,os.getcwd()+r"\src\model")
-import data_information
-import feature_target
-import splitting_method
-import missing_value
-import multi_decision_tree
+# sys.path.insert(0,os.getcwd()+r"\src\data_preparation")
+# sys.path.insert(0,os.getcwd()+r"\src\splitting_data")
+# sys.path.insert(0,os.getcwd()+r"\src\preprocessing")
+# sys.path.insert(0,os.getcwd()+r"\src\model")
+# import data_information
+# import feature_target
+# import splitting_method
+# import missing_value
+# import multi_decision_tree
+
+# for folder in os.listdir(os.getcwd()+r"\src"):
+#     sys.path.insert(0,os.getcwd()+"\\src\\"+folder)
+#     for cust_module in os.listdir(os.getcwd()+r"\src\\"+folder):
+#         if cust_module.endswith(".py"):
+#             importlib.import_module(cust_module)
 
 for folder in os.listdir(os.getcwd()+r"\src"):
-    sys.path.insert(0,os.getcwd()+"\\src\\"+folder)
-    for cust_module in os.listdir(os.getcwd()+r"\src\\"+folder):
+    for cust_module in os.listdir(os.getcwd()+"\\src\\"+folder):
         if cust_module.endswith(".py"):
-            import cust_module
+            module_path=os.getcwd()+"\\src\\"+folder+"\\"+cust_module
+            loader = importlib.machinery.SourceFileLoader(cust_module, module_path)
+            spec = importlib.util.spec_from_loader(cust_module, loader )
+            mymodule = importlib.util.module_from_spec(spec)
+            loader.exec_module(mymodule)
 
 # loading data
 data=pandas.read_csv(r"C:\Users\willy\Documents\Database\Kaggle\Melbourne Housing Snapshot\melb_data.csv")
 
 # # data information
-# data_information.data_description(data)
+data_information.data_description(data)
 
 
 # for data with int64 or float64 type
