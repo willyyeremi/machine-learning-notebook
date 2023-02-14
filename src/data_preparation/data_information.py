@@ -25,7 +25,7 @@ def data_description(data):
     print(desc_info)
 
 def data_relation(data):
-    '''further information about the data with graphic'''
+    '''further information about the feature and target with graphic'''
     import pandas
     import matplotlib
     import seaborn

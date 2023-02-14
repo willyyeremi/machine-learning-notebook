@@ -17,6 +17,12 @@ def categorical_handle(train_data,test_data,list_column_OE,list_column_OHE):
         # put index to new created dataframe because one hot encoding remove index
         OH_column_train.index=train_data.index 
         OH_column_test.index=test_data.index
+        # change the name of column created by encoding
+        OH_column_train.columns = OH_encoder.get_feature_names_out(list_column_OHE)
+        OH_column_test.columns = OH_encoder.get_feature_names_out(list_column_OHE)
+        # change the encoding result from float to integer
+        OH_column_train=OH_column_train.astype('int64')
+        OH_column_test=OH_column_test.astype('int64')        
         # drop original column from dataframe
         train_data=train_data.drop(list_column_OHE,axis=1)
         test_data=test_data.drop(list_column_OHE,axis=1)

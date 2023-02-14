@@ -1,5 +1,5 @@
-def numerical_feature(data,feature):
-    '''for selecting feature from column with numeric data'''
+def numerical_check(data,feature):
+    '''for checking numerical feature input validity'''
     import pandas
     # feature checking 
     not_exist=[]
@@ -25,8 +25,8 @@ def numerical_feature(data,feature):
     else:
         return feature
 
-def categorical_feature(data,feature):
-    '''for for selecting feature from column with categorical data with ordinality'''
+def categorical_valid(data,feature):
+    '''for checking categorical feature input validity'''
     import pandas
     if len(feature)!=0:
         # feature checking 
@@ -50,39 +50,52 @@ def categorical_feature(data,feature):
         else:
             return feature
 
-def categorical_check(data,ordinal_feature,oh_feature,target_feature):
-    wrong=[]
+def categorical_duplicate(oe_feature,ohe_feature,te_feature):
+    '''for checking is there duplicate target on different category
+    oe_feature: feature with ordinality
+    ohe_feature: feature without ordinality and <=10 categories
+    te_feature: feature without ordinality and >10 categories'''
     ordinal_oh=[]
     ordinal_target=[]
     oh_target=[]
-    for i in ordinal_feature:
-        for j in oh_feature:
+    for i in oe_feature:
+        for j in ohe_feature:
             if i==j:
                 ordinal_oh.append(j)
-                wrong.append(j)
-        for k in target_feature:
+        for k in te_feature:
             if i==k:
                 ordinal_target.append(k)
-                wrong.append(k)
-    for j in oh_feature:
-        for k in target_feature:
+    for j in ohe_feature:
+        for k in te_feature:
             if j==k:
                 oh_target.append(k)
-                wrong.append(k)
-    if len(wrong)!=0:
+    if len(ordinal_oh)!=0:
         print("the listed feature placed at ordinal_feature and oh_feature. please remove from one of the list.")
         print(ordinal_oh)
+    if len(ordinal_target)!=0:
         print("the listed feature placed at ordinal_feature and target_feature. please remove from one of the list.")
         print(ordinal_target)
+    if len(oh_target)!=0:
         print("the listed feature placed at target_feature and oh_feature. please remove from one of the list.")
         print(oh_target)
-        return []
+    if len(ordinal_oh)>0 or len(ordinal_target)>0 or len(oh_target)>0:
+        return False
+    else:
+        return True
+
+def categorical_check(data,oe_feature,ohe_feature,te_feature):
+    '''for wrapping validity and duplicate check on categorical feature
+    oe_feature: feature with ordinality
+    ohe_feature: feature without ordinality and <=10 categories
+    te_feature: feature without ordinality and >10 categories'''
+    if categorical_duplicate(oe_feature,ohe_feature,te_feature)==False:
+        categorical_check(data,oe_feature,ohe_feature,te_feature)
     else:
         categorical=[]
-        if len(ordinal_feature)>0:
-            categorical=categorical+categorical_feature(data,ordinal_feature)
-        if len(ordinal_feature)>0:    
-            categorical=categorical+categorical_feature(data,oh_feature)
-        if len(ordinal_feature)>0:
-            categorical=categorical+categorical_feature(data,target_feature)
+        if len(oe_feature)>0:
+            categorical=categorical+categorical_valid(data,oe_feature)
+        if len(ohe_feature)>0:    
+            categorical=categorical+categorical_valid(data,ohe_feature)
+        if len(te_feature)>0:
+            categorical=categorical+categorical_valid(data,te_feature)
         return categorical
