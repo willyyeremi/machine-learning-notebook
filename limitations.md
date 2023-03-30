@@ -13,5 +13,14 @@
 ## Feature Engineering
 <ol>
     <li>mutual information script has not been created</li>
+    <li>k-cluster still not created</li>
+    <li>chi-squared test for categorical still not created</li>
     <li>categorical and missing value handler before dataset splitted for determining feature has not been created</li>
+    <li>data type changer not created</li>
+</ol>
+
+## Statistic Description
+<ol>
+    <li>statistic description not divided between numerical and categorical data</li>
+    <li>skewness and kurtosis for continous feature still not created</li>
 </ol>

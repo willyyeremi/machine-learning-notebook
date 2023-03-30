@@ -42,5 +42,8 @@ def data_relation(data):
             matplotlib.pyplot.text(x=j,y=i,s=round(data_corr.iloc[i,j],2),va='center',ha='center',color='w',fontsize=12)
     matplotlib.pyplot.colorbar(location='right',orientation='vertical').ax.tick_params(labelsize=20)
     matplotlib.pyplot.show()
-    # skewness graphic
     
+def measure_of_shape(data):
+    '''information of continous feature skewness and kurtosis'''
+    import matplotlib
+    import seaborn
